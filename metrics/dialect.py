@@ -1,6 +1,6 @@
 import json
 
-from . import Dialect, DialectError, Metric
+from .helpers import Dialect, DialectError, Metric
 
 
 class JSONDialect(Dialect):
@@ -28,14 +28,15 @@ class JSONDialect(Dialect):
             kwargs.update(data['fields'])
             kwargs.update(data['metadata'])
 
-            return Metric(name=data['name'],
-                    fields=fields,
-                    metadata=metadata,
-                    **kwargs)
+            return Metric(name=name,
+                          fields=fields,
+                          metadata=metadata,
+                          **kwargs)
         except ValueError as e:
             raise DialectError('Could not decode JSON', e)
         except KeyError as e:
-            raise DialectError('Metric didn\'t contain all necessary fields', e)
+            raise DialectError('Metric didn\'t contain all necessary fields',
+                               e)
 
     def to_string(self, metric):
         return ''

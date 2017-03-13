@@ -1,4 +1,4 @@
-from . import Transport
+from .helpers import Transport
 
 
 class FileTransport(Transport):

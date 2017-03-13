@@ -19,7 +19,7 @@ def fileproxy():
     fileout = FileOut()
 
     for metric in filein.read():
-        print metric
+        print(metric)
         fileout.write(metric)
         sleep(1)
 
@@ -62,7 +62,9 @@ def proxy():
 
     class RabbitMQ(MetricHandler):
         _dialect = JSONDialect()
-        _transport = RabbitMQTransport(broker='127.0.0.1', exchange='exchange', binding='metrics.#')
+        _transport = RabbitMQTransport(broker='127.0.0.1',
+                                       exchange='exchange',
+                                       binding='metrics.#')
 
     class InfluxDB(MetricHandler):
         _dialect = InfluxDBDialect()
@@ -106,12 +108,13 @@ def sender():
         splunk.write(MyMetric(value=random(), hostname='test'))
         sleep(1)
 
+
 if __name__ == '__main__':
     from sys import argv, modules
 
     if len(argv) <= 1:
-        print 'Need an example to run. e.g.'
-        print '\t{} proxy'.format(argv[0])
+        print('Need an example to run. e.g.')
+        print('\t{} proxy'.format(argv[0]))
         exit()
 
     this_module = modules[__name__]
@@ -120,4 +123,4 @@ if __name__ == '__main__':
     if hasattr(this_module, to_run):
         getattr(this_module, to_run)()
     else:
-        print 'ERROR: Example "{}" not found'.format(to_run)
+        print('ERROR: Example "{}" not found'.format(to_run))

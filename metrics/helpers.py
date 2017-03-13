@@ -8,11 +8,15 @@ class Metric(object):
         self._metadata = metadata
         self._values = kwargs
 
+    def _verify_and_store(self, values):
+        pass
+
     def __repr__(self):
-        return '<Metric:"{}" Fields:{} Metadata:{} Values:{}>'.format(self._name,
-                                                                      self._fields,
-                                                                      self._metadata,
-                                                                      self._values)
+        return '<Metric:"{}" Fields:{} Metadata:{} Values:{}>'.format(
+                self._name,
+                self._fields,
+                self._metadata,
+                self._values)
 
 
 class MetricHelper(Metric):
