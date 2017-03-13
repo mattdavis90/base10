@@ -6,10 +6,10 @@ class Metric(object):
         self._name = name
         self._fields = fields
         self._metadata = metadata
-        self._values = kwargs
+        self._verify_and_store(kwargs)
 
     def _verify_and_store(self, values):
-        pass
+        self._values = values
 
     def __repr__(self):
         return '<Metric:"{}" Fields:{} Metadata:{} Values:{}>'.format(
@@ -47,7 +47,7 @@ class MetricHelper(Metric):
         return super(Metric, cls).__new__(cls, *args, **kwargs)
 
     def __init__(self, **kwargs):
-        self._values = kwargs
+        self._verify_and_store(kwargs)
 
 
 class MetricHandler(object):
