@@ -1,4 +1,5 @@
 import json
+from datetime import datetime
 
 from .helpers import Dialect, DialectError, Metric
 
@@ -13,7 +14,8 @@ class JSONDialect(Dialect):
         },
         metadata: {
             hostname: 'host-1'
-        }
+        },
+        timestamp: 1489478831
     }
     """
     def from_string(self, string):
@@ -23,6 +25,7 @@ class JSONDialect(Dialect):
             name = data['name']
             fields = data['fields'].keys()
             metadata = data['metadata'].keys()
+            timestamp = datetime.utcfromtimestamp(data['timestamp'])
 
             kwargs = {}
             kwargs.update(data['fields'])
@@ -31,6 +34,7 @@ class JSONDialect(Dialect):
             return Metric(name=name,
                           fields=fields,
                           metadata=metadata,
+                          time=timestamp,
                           **kwargs)
         except ValueError as e:
             raise DialectError('Could not decode JSON', e)

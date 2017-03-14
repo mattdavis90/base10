@@ -17,7 +17,8 @@ class FileTransport(Transport):
                 },
                 "metadata": {
                     "hostname": "host-1"
-                }
+                },
+                "timestamp": 1489478831
             }
             """
         else:
@@ -30,7 +31,8 @@ class FileTransport(Transport):
                 },
                 "metadata": {
                     "hostname": "host-1"
-                }
+                },
+                "timestamp": 1489478831
             }
             """
 
