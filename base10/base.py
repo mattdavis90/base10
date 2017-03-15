@@ -67,10 +67,6 @@ class Dialect(object):
         pass
 
 
-class DialectError(Exception):
-    pass
-
-
 class Transport(object):
     __metaclass__ = ABCMeta
 
