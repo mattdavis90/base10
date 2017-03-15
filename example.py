@@ -52,6 +52,38 @@ def filesender():
         sleep(1)
 
 
+def jsonsender():
+    from random import random
+    from time import sleep
+
+    from base10 import MetricHelper, MetricHandler
+    from base10.dialects import JSONDialect
+    from base10.transports import UDPTransport
+
+    class MyMetric(MetricHelper):
+        _name = 'metric'
+
+        _fields = [
+                'value',
+                ]
+
+        _metadata = [
+                'hostname',
+                ]
+
+    class JSON(MetricHandler):
+        _dialect = JSONDialect()
+        _transport = UDPTransport(host='127.0.0.1', port=10000)
+        _autocommit = True
+        _bulk_size = 5
+
+    json = JSON()
+
+    while True:
+        json.write(MyMetric(value=random(), hostname='test'))
+        sleep(1)
+
+
 def proxy():
     from base10 import MetricHandler
     from base10.dialects import JSONDialect, InfluxDBDialect
