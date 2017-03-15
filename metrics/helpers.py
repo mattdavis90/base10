@@ -28,12 +28,28 @@ class Metric(object):
     def _current_timestamp(self):
         return datetime.utcnow()
 
+    @property
+    def name(self):
+        return self._name
+
+    @property
+    def fields(self):
+        return self._fields
+
+    @property
+    def metadata(self):
+        return self._metadata
+
+    @property
+    def values(self):
+        return self._values
+
     def __repr__(self):
         return '<Metric:"{}" Fields:{} Metadata:{} Values:{}>'.format(
-                self._name,
-                self._fields,
-                self._metadata,
-                self._values)
+                self.name,
+                self.fields,
+                self.metadata,
+                self.values)
 
 
 class MetricHelper(Metric):

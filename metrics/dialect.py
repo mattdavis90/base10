@@ -1,4 +1,5 @@
 import json
+import calendar
 from datetime import datetime
 
 from .helpers import Dialect, DialectError, Metric
@@ -43,7 +44,14 @@ class JSONDialect(Dialect):
                                e)
 
     def to_string(self, metric):
-        return ''
+        return json.dumps({
+            'name': metric.name,
+            'fields': {k: v for k, v in metric.values.items()
+                       if k in metric.fields},
+            'metadata': {k: v for k, v in metric.values.items()
+                         if k in metric.metadata},
+            'timestamp': calendar.timegm(metric.values['time'].utctimetuple())
+        })
 
 
 class InfluxDBDialect(Dialect):
