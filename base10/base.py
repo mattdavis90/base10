@@ -26,7 +26,8 @@ class Metric(object):
         self._values['time'] = timestamp
 
     def _current_timestamp(self):
-        return datetime.utcnow()
+        return int((datetime.utcnow() - datetime(1970, 1, 1)).total_seconds()
+                   * 1000)
 
     @property
     def name(self):

@@ -1,6 +1,4 @@
 import json
-import calendar
-from datetime import datetime
 
 from base10.base import Dialect, Metric
 from base10.exceptions import DialectError
@@ -27,7 +25,7 @@ class JSONDialect(Dialect):
             name = data['name']
             fields = data['fields'].keys()
             metadata = data['metadata'].keys()
-            timestamp = datetime.utcfromtimestamp(data['timestamp'])
+            timestamp = data['timestamp']
 
             kwargs = {}
             kwargs.update(data['fields'])
@@ -51,5 +49,5 @@ class JSONDialect(Dialect):
                        if k in metric.fields},
             'metadata': {k: v for k, v in metric.values.items()
                          if k in metric.metadata},
-            'timestamp': calendar.timegm(metric.values['time'].utctimetuple())
+            'timestamp': metric.values['time']
         })
