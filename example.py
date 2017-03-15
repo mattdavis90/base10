@@ -3,9 +3,9 @@
 
 def fileproxy():
     from time import sleep
-    from metrics import MetricHandler
-    from metrics.dialect import JSONDialect
-    from metrics.transport import FileTransport
+    from base10 import MetricHandler
+    from base10.dialect import JSONDialect
+    from base10.transport import FileTransport
 
     class FileIn(MetricHandler):
         _dialect = JSONDialect()
@@ -26,9 +26,9 @@ def fileproxy():
 def filesender():
     from random import random
     from time import sleep
-    from metrics import MetricHelper, MetricHandler
-    from metrics.dialect import JSONDialect
-    from metrics.transport import FileTransport
+    from base10 import MetricHelper, MetricHandler
+    from base10.dialect import JSONDialect
+    from base10.transport import FileTransport
 
     class MyMetric(MetricHelper):
         _name = 'metric'
@@ -53,9 +53,9 @@ def filesender():
 
 
 def proxy():
-    from metrics import MetricHandler
-    from metrics.dialect import JSONDialect, InfluxDBDialect
-    from metrics.transport import RabbitMQTransport, UDPTransport
+    from base10 import MetricHandler
+    from base10.dialect import JSONDialect, InfluxDBDialect
+    from base10.transport import RabbitMQTransport, UDPTransport
 
     class RabbitMQ(MetricHandler):
         _dialect = JSONDialect()
@@ -78,9 +78,9 @@ def sender():
     from random import random
     from time import sleep
 
-    from metrics import MetricHelper, MetricHandler
-    from metrics.dialect import SplunkDialect
-    from metrics.transport import UDPTransport
+    from base10 import MetricHelper, MetricHandler
+    from base10.dialect import SplunkDialect
+    from base10.transport import UDPTransport
 
     class MyMetric(MetricHelper):
         _name = 'metric'
