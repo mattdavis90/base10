@@ -92,7 +92,7 @@ class MetricHandler(object):
 
     def read(self):
         while True:
-            yield self._dialect.from_string(self._transport.read())
+            yield self._dialect.from_string(next(self._transport.read()))
 
     def write(self, metric):
         return self._transport.write(self._dialect.to_string(metric))

@@ -9,11 +9,11 @@ def fileproxy():
 
     class FileIn(MetricHandler):
         _dialect = JSONDialect()
-        _transport = FileTransport(filename='in')
+        _transport = FileTransport(filename='in', mode='r')
 
     class FileOut(MetricHandler):
         _dialect = JSONDialect()
-        _transport = FileTransport(filename='out')
+        _transport = FileTransport(filename='out', mode='w')
 
     filein = FileIn()
     fileout = FileOut()
@@ -43,7 +43,7 @@ def filesender():
 
     class FileOut(MetricHandler):
         _dialect = JSONDialect()
-        _transport = FileTransport(filename='out')
+        _transport = FileTransport(filename='out', mode='w')
 
     fileout = FileOut()
 
