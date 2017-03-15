@@ -1,4 +1,4 @@
-from .helpers import Transport
+from base10.base import Transport
 
 
 class FileTransport(Transport):
@@ -15,11 +15,3 @@ class FileTransport(Transport):
     def write(self, string):
         self._file.write(string + '\n')
         return True
-
-
-class RabbitMQTransport(Transport):
-    pass
-
-
-class UDPTransport(Transport):
-    pass

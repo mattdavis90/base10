@@ -1,0 +1,2 @@
+class DialectError(Exception):
+    pass

@@ -2,7 +2,8 @@ import json
 import calendar
 from datetime import datetime
 
-from .helpers import Dialect, DialectError, Metric
+from base10.base import Dialect, Metric
+from base10.exceptions import DialectError
 
 
 class JSONDialect(Dialect):
@@ -52,13 +53,3 @@ class JSONDialect(Dialect):
                          if k in metric.metadata},
             'timestamp': calendar.timegm(metric.values['time'].utctimetuple())
         })
-
-
-class InfluxDBDialect(Dialect):
-    def new(self):
-        return Metric(name='influx')
-
-
-class SplunkDialect(Dialect):
-    def new(self):
-        return Metric(name='splunk', fields=[])
