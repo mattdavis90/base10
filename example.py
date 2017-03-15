@@ -19,7 +19,6 @@ def fileproxy():
     fileout = FileOut()
 
     for metric in filein.read():
-        print(metric)
         fileout.write(metric)
         sleep(1)
 
@@ -49,9 +48,7 @@ def filesender():
     fileout = FileOut()
 
     while True:
-        metric = MyMetric(value=random(), hostname='test')
-        print(metric)
-        fileout.write(metric)
+        fileout.write(MyMetric(value=random(), hostname='test'))
         sleep(1)
 
 

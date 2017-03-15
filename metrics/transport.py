@@ -37,6 +37,7 @@ class FileTransport(Transport):
             """
 
     def write(self, string):
+        print(string)
         return True
 
 
