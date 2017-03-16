@@ -13,11 +13,11 @@ class InfluxDBDialect(Dialect):
                   for k, v in metric.values.items() if k in metric.fields]
         timestamp = metric.values['time']
 
-        return '{}{}{} {} {}'.format(name,
-                                     ',' if len(tags) > 0 else '',
-                                     ','.join(tags),
-                                     ','.join(fields),
-                                     timestamp)
+        return '{}{}{} {} {:d}'.format(name,
+                                       ',' if len(tags) > 0 else '',
+                                       ','.join(tags),
+                                       ','.join(fields),
+                                       int(timestamp*1e6))
 
     def _clean_measurement(self, measurement):
         measurement = measurement.replace(',', '\\,')
