@@ -1,6 +1,8 @@
 from datetime import datetime
 from abc import ABCMeta, abstractmethod
 
+from base10.exceptions import DialectError
+
 
 class Metric(object):
     def __init__(self, name, fields, metadata, **kwargs):
@@ -54,21 +56,17 @@ class Metric(object):
 
 
 class Dialect(object):
-    __metaclass__ = ABCMeta
-
     def __init__(self, *args, **kwargs):
         pass
 
-    @abstractmethod
     def from_string(self, string):
-        pass
+        raise DialectError('Attempt to read with a write-only dialect')
 
-    @abstractmethod
     def to_string(self, metric):
-        pass
+        raise DialectError('Attempt to write with a read-only dialect')
 
 
-class Transport(object):
+class Reader(object):
     __metaclass__ = ABCMeta
 
     def __init__(self, *args, **kwargs):
@@ -76,6 +74,13 @@ class Transport(object):
 
     @abstractmethod
     def read(self):
+        pass
+
+
+class Writer(object):
+    __metaclass__ = ABCMeta
+
+    def __init__(self, *args, **kwargs):
         pass
 
     @abstractmethod

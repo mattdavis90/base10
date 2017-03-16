@@ -1,6 +1,10 @@
-class DialectError(Exception):
+class Base10Error(Exception):
     pass
 
 
-class TransportError(Exception):
+class DialectError(Base10Error):
+    pass
+
+
+class TransportError(Base10Error):
     pass

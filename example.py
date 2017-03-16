@@ -5,15 +5,15 @@ def fileproxy():
     from time import sleep
     from base10 import MetricHandler
     from base10.dialects import JSONDialect
-    from base10.transports import FileTransport
+    from base10.transports import FileReader, FileWriter
 
     class FileIn(MetricHandler):
         _dialect = JSONDialect()
-        _transport = FileTransport(filename='in', mode='r')
+        _reader = FileReader(filename='in')
 
     class FileOut(MetricHandler):
         _dialect = JSONDialect()
-        _transport = FileTransport(filename='out', mode='w')
+        _writer = FileWriter(filename='out')
 
     filein = FileIn()
     fileout = FileOut()
@@ -28,7 +28,7 @@ def filesender():
     from time import sleep
     from base10 import MetricHelper, MetricHandler
     from base10.dialects import JSONDialect
-    from base10.transports import FileTransport
+    from base10.transports import FileWriter
 
     class MyMetric(MetricHelper):
         _name = 'metric'
@@ -43,7 +43,7 @@ def filesender():
 
     class FileOut(MetricHandler):
         _dialect = JSONDialect()
-        _transport = FileTransport(filename='out', mode='w')
+        _writer = FileWriter(filename='out')
 
     fileout = FileOut()
 
@@ -58,7 +58,7 @@ def jsonsender():
 
     from base10 import MetricHelper, MetricHandler
     from base10.dialects import JSONDialect
-    from base10.transports import UDPTransport
+    from base10.transports import UDPWriter
 
     class MyMetric(MetricHelper):
         _name = 'metric'
@@ -73,9 +73,7 @@ def jsonsender():
 
     class JSON(MetricHandler):
         _dialect = JSONDialect()
-        _transport = UDPTransport(host='127.0.0.1', port=10000)
-        _autocommit = True
-        _bulk_size = 5
+        _writer = UDPWriter(host='127.0.0.1', port=10000)
 
     json = JSON()
 

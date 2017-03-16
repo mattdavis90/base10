@@ -3,10 +3,6 @@ from base10.exceptions import DialectError
 
 
 class InfluxDBDialect(Dialect):
-    def from_string(self, string):
-        raise DialectError('The InfluxDBDialect can\'t yet parse metrics',
-                           NotImplementedError())
-
     def to_string(self, metric):
         name = self._clean_measurement(metric.name)
         tags = ['{}={}'.format(self._clean_tag_key(k),
