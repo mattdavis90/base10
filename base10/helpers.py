@@ -49,8 +49,8 @@ class MetricHandler(object):
             while True:
                 yield self._dialect.from_string(next(self._reader.read()))
         except AttributeError as e:
-            raise Base10Error('Attempt to read from a \
-                              write-only MetricHandler', e)
+            raise Base10Error(
+                'Attempt to read from a write-only MetricHandler', e)
 
     def write(self, metric):
         try:
