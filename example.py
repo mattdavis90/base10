@@ -1,64 +1,13 @@
 #!/usr/bin/env python
 
 
-def fileproxy():
-    from time import sleep
-    from base10 import MetricHandler
-    from base10.dialects import JSONDialect
-    from base10.transports import FileReader, FileWriter
-
-    class FileIn(MetricHandler):
-        _dialect = JSONDialect()
-        _reader = FileReader(filename='in')
-
-    class FileOut(MetricHandler):
-        _dialect = JSONDialect()
-        _writer = FileWriter(filename='out')
-
-    filein = FileIn()
-    fileout = FileOut()
-
-    for metric in filein.read():
-        fileout.write(metric)
-        sleep(1)
-
-
-def filesender():
-    from random import random
-    from time import sleep
-    from base10 import MetricHelper, MetricHandler
-    from base10.dialects import JSONDialect
-    from base10.transports import FileWriter
-
-    class MyMetric(MetricHelper):
-        _name = 'metric'
-
-        _fields = [
-                'value',
-                ]
-
-        _metadata = [
-                'hostname',
-                ]
-
-    class FileOut(MetricHandler):
-        _dialect = JSONDialect()
-        _writer = FileWriter(filename='out')
-
-    fileout = FileOut()
-
-    while True:
-        fileout.write(MyMetric(value=random(), hostname='test'))
-        sleep(1)
-
-
-def jsonsender():
+def json_sender():
     from random import random
     from time import sleep
 
     from base10 import MetricHelper, MetricHandler
     from base10.dialects import JSONDialect
-    from base10.transports import UDPWriter
+    from base10.transports import RabbitMQWriter
 
     class MyMetric(MetricHelper):
         _name = 'metric'
@@ -73,7 +22,7 @@ def jsonsender():
 
     class JSON(MetricHandler):
         _dialect = JSONDialect()
-        _writer = UDPWriter(host='127.0.0.1', port=10000)
+        _writer = RabbitMQWriter(host='127.0.0.1', port=10000)
 
     json = JSON()
 
@@ -82,20 +31,20 @@ def jsonsender():
         sleep(1)
 
 
-def proxy():
+def json_to_influx_proxy():
     from base10 import MetricHandler
     from base10.dialects import JSONDialect, InfluxDBDialect
-    from base10.transports import RabbitMQTransport, UDPTransport
+    from base10.transports import RabbitMQReader, UDPWriter
 
     class RabbitMQ(MetricHandler):
         _dialect = JSONDialect()
-        _transport = RabbitMQTransport(broker='127.0.0.1',
-                                       exchange='exchange',
-                                       binding='metrics.#')
+        _reader = RabbitMQReader(broker='127.0.0.1',
+                                 exchange='exchange',
+                                 binding='metrics.#')
 
     class InfluxDB(MetricHandler):
         _dialect = InfluxDBDialect()
-        _transport = UDPTransport(host='127.0.0.1', port=10000)
+        _writer = UDPWriter(host='127.0.0.1', port=10000)
 
     rabbitmq = RabbitMQ()
     influxdb = InfluxDB()
@@ -104,13 +53,13 @@ def proxy():
         influxdb.write(metric)
 
 
-def sender():
+def influx_sender():
     from random import random
     from time import sleep
 
     from base10 import MetricHelper, MetricHandler
-    from base10.dialects import SplunkDialect
-    from base10.transports import UDPTransport
+    from base10.dialects import InfluxDBDialect
+    from base10.transports import UDPWriter
 
     class MyMetric(MetricHelper):
         _name = 'metric'
@@ -123,16 +72,14 @@ def sender():
                 'hostname',
                 ]
 
-    class Splunk(MetricHandler):
-        _dialect = SplunkDialect()
-        _transport = UDPTransport(host='127.0.0.1', port=10000)
-        _autocommit = True
-        _bulk_size = 5
+    class InfluxDB(MetricHandler):
+        _dialect = InfluxDBDialect()
+        _writer = UDPWriter(host='127.0.0.1', port=10000)
 
-    splunk = Splunk()
+    influxdb = InfluxDB()
 
     while True:
-        splunk.write(MyMetric(value=random(), hostname='test'))
+        influxdb.write(MyMetric(value=random(), hostname='test'))
         sleep(1)
 
 
