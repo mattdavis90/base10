@@ -2,7 +2,7 @@ from distutils.core import setup
 setup(
     name='base10',
     packages=['base10'],
-    version='0.2',
+    version='0.3',
     license='MIT',
     description='Base10 is a metrics abstraction layer for \
             linking multiple metrics source and stores. It also \
@@ -10,7 +10,7 @@ setup(
     author='Matt Davis',
     author_email='mattdavis90@googlemail.com',
     url='https://github.com/mattdavis90/base10',
-    download_url='https://github.com/mattdavis90/base10/archive/0.2.tar.gz',
+    download_url='https://github.com/mattdavis90/base10/archive/0.3.tar.gz',
     keywords=['metrics', 'abstraction'],
     classifiers=[],
 )
