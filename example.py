@@ -22,7 +22,9 @@ def json_sender():
 
     class JSON(MetricHandler):
         _dialect = JSONDialect()
-        _writer = RabbitMQWriter(host='127.0.0.1', port=10000)
+        _writer = RabbitMQWriter(broker='127.0.0.1',
+                                 exchange='amq.topic',
+                                 topic='metrics.example')
 
     json = JSON()
 
@@ -39,8 +41,8 @@ def json_to_influx_proxy():
     class RabbitMQ(MetricHandler):
         _dialect = JSONDialect()
         _reader = RabbitMQReader(broker='127.0.0.1',
-                                 exchange='exchange',
-                                 binding='metrics.#')
+                                 exchange='amq.topic',
+                                 routing_key='metrics.#')
 
     class InfluxDB(MetricHandler):
         _dialect = InfluxDBDialect()
