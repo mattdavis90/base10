@@ -1,4 +1,4 @@
-from datetime import datetime
+from time import time
 from abc import ABCMeta, abstractmethod
 
 from base10.exceptions import DialectError
@@ -28,8 +28,7 @@ class Metric(object):
         self._values['time'] = timestamp
 
     def _current_timestamp(self):
-        return int((datetime.utcnow() - datetime(1970, 1, 1)).total_seconds()
-                   * 1000)
+        return time() * 1000
 
     @property
     def name(self):
