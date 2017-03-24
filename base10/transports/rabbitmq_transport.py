@@ -2,7 +2,9 @@ from base10.base import Reader, Writer
 
 
 class RabbitMQTransport(object):
-    def __init__(self, broker='127.0.0.1', exchange='amq.topic', queue_name=None):
+    def __init__(self, broker='127.0.0.1', port=5672, virtual_host='/',
+                 exchange='amq.topic', queue_name=None, username='guest',
+                 password='guest'):
         try:
             self._pika = __import__('pika')
         except ImportError:
@@ -17,7 +19,10 @@ class RabbitMQTransport(object):
         self._exchange = exchange
         self._queue_name = queue_name
 
-        connection = self._pika.BlockingConnection()
+        credentials = self._pika.PlainCredentials(username, password)
+        parameters = self._pika.ConnectionParameters(broker, port,
+                                                     virtual_host, credentials)
+        connection = self._pika.BlockingConnection(parameters)
         self._channel = connection.channel()
 
 
