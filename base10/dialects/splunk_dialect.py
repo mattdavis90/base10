@@ -3,12 +3,13 @@ from base10.exceptions import DialectError
 
 
 class SplunkDialect(Dialect):
+
     def to_string(self, metric):
-        pairs = [
-            'metric_name={}'.format(self._clean_value(metric.name))
+        pairs = ['metric_name={}'.format(self._clean_value(metric.name))]
+        pairs += [
+            '{}={}'.format(self._clean_key(k), self._clean_value(v))
+            for k, v in metric.values.items() if k != 'time'
         ]
-        pairs += ['{}={}'.format(self._clean_key(k), self._clean_value(v))
-                  for k, v in metric.values.items() if k != 'time']
         timestamp = int(metric.values['time'])
 
         return '{:d} {}'.format(timestamp, ','.join(pairs))

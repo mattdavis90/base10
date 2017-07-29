@@ -2,8 +2,14 @@ from base10.base import Reader, Writer
 
 
 class RabbitMQTransport(object):
-    def __init__(self, broker='127.0.0.1', port=5672, virtual_host='/',
-                 exchange='amq.topic', queue_name=None, username='guest',
+
+    def __init__(self,
+                 broker='127.0.0.1',
+                 port=5672,
+                 virtual_host='/',
+                 exchange='amq.topic',
+                 queue_name=None,
+                 username='guest',
                  password='guest'):
         try:
             self._pika = __import__('pika')
@@ -20,13 +26,14 @@ class RabbitMQTransport(object):
         self._queue_name = queue_name
 
         credentials = self._pika.PlainCredentials(username, password)
-        parameters = self._pika.ConnectionParameters(broker, port,
-                                                     virtual_host, credentials)
+        parameters = self._pika.ConnectionParameters(broker, port, virtual_host,
+                                                     credentials)
         connection = self._pika.BlockingConnection(parameters)
         self._channel = connection.channel()
 
 
 class RabbitMQReader(RabbitMQTransport, Reader):
+
     def __init__(self, routing_key='metrics.#', auto_delete=True, **kwargs):
         super(RabbitMQReader, self).__init__(**kwargs)
 
@@ -40,6 +47,7 @@ class RabbitMQReader(RabbitMQTransport, Reader):
 
 
 class RabbitMQWriter(RabbitMQTransport, Writer):
+
     def __init__(self, topic='metrics.all', **kwargs):
         super(RabbitMQWriter, self).__init__(**kwargs)
 

@@ -1,7 +1,6 @@
 from base10.helpers import (
     MetricHelper,
-    MetricHandler,
-)
+    MetricHandler,)
 
 __all__ = [
     'MetricHelper',

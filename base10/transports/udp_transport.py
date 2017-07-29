@@ -5,6 +5,7 @@ from base10.exceptions import TransportError
 
 
 class UDPWriter(Writer):
+
     def __init__(self, host, port):
         self._host = host
         self._port = port

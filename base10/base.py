@@ -5,6 +5,7 @@ from base10.exceptions import DialectError
 
 
 class Metric(object):
+
     def __init__(self, name, fields, metadata, **kwargs):
         self._name = name
         self._fields = fields
@@ -20,9 +21,7 @@ class Metric(object):
 
         if sorted(self._fields + self._metadata) != sorted(values.keys()):
             raise NameError('Expected {} but got {}'.format(
-                sorted(self._fields + self._metadata),
-                sorted(values.keys())
-                ))
+                sorted(self._fields + self._metadata), sorted(values.keys())))
 
         self._values = values
         self._values['time'] = timestamp
@@ -48,13 +47,11 @@ class Metric(object):
 
     def __repr__(self):
         return '<Metric:"{}" Fields:{} Metadata:{} Values:{}>'.format(
-                self.name,
-                self.fields,
-                self.metadata,
-                self.values)
+            self.name, self.fields, self.metadata, self.values)
 
 
 class Dialect(object):
+
     def __init__(self, *args, **kwargs):
         pass
 
