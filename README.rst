@@ -74,13 +74,15 @@ This shows a simple proxy that reads JSON formatted metrics from RabbitMQ and ou
 
 Contributing
 ------------
-To contribute to pika, please make sure that any new features or changes
+To contribute to base10, please make sure that any new features or changes
 to existing functionality **include test coverage**.
 
 *Pull requests that add or change code without coverage will most likely be rejected.*
 
 Additionally, please format your code using `yapf <http://pypi.python.org/pypi/yapf>`_
-with ``google`` style prior to issuing your pull request (``yapf --style=google -i -r base10``).
+with ``google`` style prior to issuing your pull request.
+
+``yapf --style=google -i -r base10``
 
 .. |Version| image:: https://img.shields.io/pypi/v/base10.svg?
    :target: http://badge.fury.io/py/base10
