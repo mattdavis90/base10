@@ -2,7 +2,7 @@ Base10
 ======
 Base10 is a metrics abstraction layer.
 
-|Version| |Status| |Coverage| |License| |Docs|
+|PyVersions| |PyPiVersion| |BuildStatus| |Coverage| |License| |Docs|
 
 Introduction
 ------------
@@ -86,10 +86,13 @@ with ``google`` style prior to issuing your pull request.
 
 ``yapf --style=google -i -r base10``
 
-.. |Version| image:: https://img.shields.io/pypi/v/base10.svg?
+.. |PyVersions| image:: https://img.shields.io/pypi/pyversions/base10.svg?
    :target: http://badge.fury.io/py/base10
 
-.. |Status| image:: https://img.shields.io/travis/mattdavis90/base10.svg?
+.. |PyPiVersion| image:: https://img.shields.io/pypi/v/base10.svg?
+   :target: http://badge.fury.io/py/base10
+
+.. |BuildStatus| image:: https://img.shields.io/travis/mattdavis90/base10.svg?
    :target: https://travis-ci.org/mattdavis90/base10
 
 .. |Coverage| image:: https://img.shields.io/codecov/c/github/mattdavis90/base10.svg?
