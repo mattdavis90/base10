@@ -25,52 +25,54 @@ This shows a simple metric generator that writes a JSON formatted metric, contai
     from base10.dialects import JSONDialect
     from base10.transports import RabbitMQWriter
 
-    class MyMetric(MetricHelper):
-        _name = 'metric'
+    if __name__ == '__main__':
 
-        _fields = [
+        class MyMetric(MetricHelper):
+            _name = 'metric'
+
+            _fields = [
                 'value',
-                ]
+            ]
 
-        _metadata = [
+            _metadata = [
                 'hostname',
-                ]
+            ]
 
-    class JSON(MetricHandler):
-        _dialect = JSONDialect()
-        _writer = RabbitMQWriter(broker='127.0.0.1',
-                                 exchange='amq.topic',
-                                 topic='metrics.example')
+        class JSON(MetricHandler):
+            _dialect = JSONDialect()
+            _writer = RabbitMQWriter(
+                broker='127.0.0.1', exchange='amq.topic', topic='metrics.example')
 
-    json = JSON()
+        json = JSON()
 
-    while True:
-        json.write(MyMetric(value=random(), hostname='test'))
-        sleep(1)
+        while True:
+            json.write(MyMetric(value=random(), hostname='test'))
+            sleep(1)
 
 This shows a simple proxy that reads JSON formatted metrics from RabbitMQ and outputs them in InfluxDB format over a UDP socket.
 
 .. code :: python
 
     from base10 import MetricHandler
-    from base10.dialects import JSONDialect, InfluxDBDialect
+    from base10.dialects import JSONDialect, SplunkDialect  #InfluxDBDialect
     from base10.transports import RabbitMQReader, UDPWriter
 
-    class RabbitMQ(MetricHandler):
-        _dialect = JSONDialect()
-        _reader = RabbitMQReader(broker='127.0.0.1',
-                                 exchange='amq.topic',
-                                 routing_key='metrics.#')
+    if __name__ == '__main__':
 
-    class InfluxDB(MetricHandler):
-        _dialect = InfluxDBDialect()
-        _writer = UDPWriter(host='127.0.0.1', port=10000)
+        class RabbitMQ(MetricHandler):
+            _dialect = JSONDialect()
+            _reader = RabbitMQReader(
+                broker='127.0.0.1', exchange='amq.topic', routing_key='metrics.#')
 
-    rabbitmq = RabbitMQ()
-    influxdb = InfluxDB()
+        class InfluxDB(MetricHandler):
+            _dialect = SplunkDialect()  #InfluxDBDialect()
+            _writer = UDPWriter(host='127.0.0.1', port=10000)
 
-    for metric in rabbitmq.read():
-        influxdb.write(metric)
+        rabbitmq = RabbitMQ()
+        influxdb = InfluxDB()
+
+        for metric in rabbitmq.read():
+            influxdb.write(metric)
 
 Contributing
 ------------
