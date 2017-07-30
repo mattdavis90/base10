@@ -1,7 +1,7 @@
 language: python
 
 python:
-  - "2.7"
+- '2.7'
 
 install:
 - travis_retry pip install .
@@ -12,3 +12,9 @@ script:
 - pytest --cov
 
 after_success: codecov
+
+notifications:
+  hipchat:
+    rooms:
+      secure: P5yRnCP8OM3q4XIFR6jCEnYdoxyUxGm0ETf7P7rvTFfbyec975b5rwD7Zjbx7P2VSBj0cccUL0JFZ07f+2onlE5kTK1s/YIXc3qD6IUmjXwEI8XlzNxyovbvpi9USdz031GXtQF2ddW90ZdvaPoonrh5M7/ooZ1zQ8ehd1SdCQGhr/EP+FWyG7GK2bEgCSaQgbF+9UOiAgQHh+ItTWK9z4m2KPgjyH3pzsf5lNFxuUTnhG3Ri97HP3gcrm1ywkOR81GG8azdHhPKQdexV2otg0bPNUPTOnt+72tkYUgaBU6zQiNqRBkp6ecPSMby9h5gtJNn7e4nzOqjhDp4SxqL+DeRJ80YS7TG1+gpeu8XpVq+eacLNIjeBMcAvwXMiibj3K/GZQWB0qddyUGhb1vI9T9DAwbsrmolHEgxmmeLXOmdUBjEoCB1KFv4maV11efYWhLGFrNK5LZib1tqHJmGa4lhFahHWbH1HX/ICKQ4ewG/F85jLe95BbfT+IR1rGGH2jRCBC9PWLZ/5R0IKao5h6ciI3JMUa+TPtC8k5R/lCPtKrWB2sFBErZmrHoTNacYwXdR9iKYl/oIyRgwl11PBVzABq9TFSJ8O9UXdsE5sc/vckOxN7GKwWB1EH2EOk9FE3EmV+ydmpT10D3TVwl6UKjo+g/ajrrJkRlq7e0qXb8=
+    notify: true
