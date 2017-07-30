@@ -33,6 +33,10 @@ class MetricHelper(Metric):
         return super(Metric, cls).__new__(cls, *args, **kwargs)
 
     def __init__(self, **kwargs):
+        kwargs.pop('name', None)
+        kwargs.pop('fields', None)
+        kwargs.pop('metadata', None)
+
         self._verify_and_store(kwargs)
 
 
