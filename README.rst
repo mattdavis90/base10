@@ -101,6 +101,5 @@ with ``google`` style prior to issuing your pull request.
 .. |License| image:: https://img.shields.io/pypi/l/base10.svg?
    :target: https://base10.readthedocs.io
 
-.. |Docs| image:: https://readthedocs.org/projects/base10/badge/?version=stable
+.. |Docs| image:: https://readthedocs.org/projects/base10/badge/?version=latest
    :target: https://base10.readthedocs.io
-   :alt: Documentation Status
