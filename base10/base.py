@@ -6,8 +6,17 @@ from base10.exceptions import DialectError
 
 
 class Metric(object):
+    """Generic Metric class
+    """
 
     def __init__(self, name, fields, metadata, **kwargs):
+        """Create a new Metric
+        
+        :param name: Name of the metric.
+        :param fields: List of field names to include.
+        :param metadata: List of metadata field names to include.
+        :param **kwargs: Keyword values for the fields and metadata.
+        """
         self._name = name
         self._fields = fields
         self._metadata = metadata
@@ -32,18 +41,26 @@ class Metric(object):
 
     @property
     def name(self):
+        """Get Metric name
+        """
         return self._name
 
     @property
     def fields(self):
+        """Get Metric fields
+        """
         return self._fields
 
     @property
     def metadata(self):
+        """Get Metric metadata
+        """
         return self._metadata
 
     @property
     def values(self):
+        """Get Metric values
+        """
         return self._values
 
     def __repr__(self):
