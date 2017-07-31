@@ -1,4 +1,4 @@
-Base10 |Version| |Build| |Coverage| |Health|
+Base10 |Version| |Build| |Coverage| |Health| |Docs|
 ===================================================================
 
 |Compatibility| |Implementations| |Format| |Downloads|
@@ -95,6 +95,8 @@ with ``google`` style prior to issuing your pull request.
    :target: https://codeclimate.com/github/mattdavis90/base10
 .. |Version| image:: https://img.shields.io/pypi/v/base10.svg
    :target: https://pypi.python.org/pypi/base10
+.. |Docs| image:: https://readthedocs.org/projects/base10/badge/?version=latest
+   :target: https://base10.readthedocs.io
 .. |Downloads| image:: https://img.shields.io/pypi/dm/base10.svg
    :target: https://pypi.python.org/pypi/base10
 .. |Compatibility| image:: https://img.shields.io/pypi/pyversions/base10.svg
