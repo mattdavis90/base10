@@ -1,10 +1,8 @@
 from setuptools import setup
 
-from base10 import __version__
-
 setup(
     name='base10',
-    version=__version__,
+    version='0.5.0',
     packages=('base10',),
     url='https://github.com/mattdavis90/base10',
     license='MIT',
