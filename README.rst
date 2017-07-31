@@ -11,6 +11,13 @@ Documentation
 Base10's documentation can be found at `https://base10.readthedocs.io <https://base10.readthedocs.io>`_
 
 
+Installing Base10
+-----------------
+Base10 can be installed from Pypi using pip::
+
+    pip install base10
+
+
 Example
 -------
 This shows a simple metric generator that writes a JSON formatted metric, containing a random value, to RabbitMQ.
