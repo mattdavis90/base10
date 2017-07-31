@@ -1,6 +1,7 @@
 import re
 from setuptools import setup, find_packages
 
+
 def find_version(fname):
     """Attempts to find the version number in the file names fname.
     Raises RuntimeError if not found.
@@ -17,15 +18,17 @@ def find_version(fname):
         raise RuntimeError('Cannot find version information')
     return version
 
+
 def read(fname):
     with open(fname) as fp:
         content = fp.read()
     return content
 
+
 setup(
     name='base10',
     version=find_version('base10/__init__.py'),
-    packages=find_packages(exclude=('test*', )),
+    packages=find_packages(exclude=('test*',)),
     package_dir={'base10': 'base10'},
     url='https://github.com/mattdavis90/base10',
     license='MIT',
