@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='base10',
-    version='0.5.0',
+    version='0.5.1',
     packages=('base10',),
     url='https://github.com/mattdavis90/base10',
     license='MIT',
