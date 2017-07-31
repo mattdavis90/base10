@@ -1,5 +1,6 @@
+import abc
+import six
 from time import time
-from abc import ABCMeta, abstractmethod
 
 from base10.exceptions import DialectError
 
@@ -62,23 +63,21 @@ class Dialect(object):
         raise DialectError('Attempt to write with a read-only dialect')
 
 
+@six.add_metaclass(abc.ABCMeta)
 class Reader(object):
-    __metaclass__ = ABCMeta
-
     def __init__(self, *args, **kwargs):
         pass
 
-    @abstractmethod
+    @abc.abstractmethod
     def read(self):
         pass
 
 
+@six.add_metaclass(abc.ABCMeta)
 class Writer(object):
-    __metaclass__ = ABCMeta
-
     def __init__(self, *args, **kwargs):
         pass
 
-    @abstractmethod
+    @abc.abstractmethod
     def write(self, string):
         pass
