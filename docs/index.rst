@@ -1,7 +1,7 @@
 Base10: Metric abstraction layer
 ================================
 
-Release v\ |version|. (:ref:`Changelog <changelog>`)
+Release v\ |release|. (:ref:`Changelog <changelog>`)
 
 **Base10** is a metrics abstractoin layer for linking multiple metrics source and stores. It also simplifies metric creation and proxying.
 
