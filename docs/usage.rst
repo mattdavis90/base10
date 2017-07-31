@@ -1,6 +1,13 @@
-Example
--------
-This shows a simple metric generator that writes a JSON formatted metric, containing a random value, to RabbitMQ.
+.. _usage:
+
+Usage
+=====
+Use :class:`MetricHelper <base10.MetricHelper>` to aid :class:`Metric <base10.base.Metric>` creation, and :class:`MetricHandler <base10.MetricHandler>` to aid reading and writing metrics.
+
+Metric Generator
+----------------
+
+This shows a simple metric generator that writes a JSON formatted metric, containing a random value, to RabbitMQ. 
 
 .. code :: python
 
@@ -34,6 +41,9 @@ This shows a simple metric generator that writes a JSON formatted metric, contai
         while True:
             json.write(MyMetric(value=random(), hostname='test'))
             sleep(1)
+
+Metric Proxy
+------------
 
 This shows a simple proxy that reads JSON formatted metrics from RabbitMQ and outputs them in InfluxDB format over a UDP socket.
 
