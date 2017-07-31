@@ -1,34 +1,28 @@
-from setuptools import setup, find_packages
-from base10 import __version__ as base10_version
+from setuptools import setup
+
+from base10 import __version__
 
 setup(
     name='base10',
-    packages=find_packages('.'),
-    version=base10_version,
+    version=__version__,
+    packages=('base10',),
+    url='https://github.com/mattdavis90/base10',
     license='MIT',
-    description='Base10 is a metrics abstraction layer for \
-            linking multiple metrics source and stores. It also \
-            simplifies metric creation and proxying.',
     author='Matt Davis',
     author_email='mattdavis90@googlemail.com',
-    url='https://github.com/mattdavis90/base10',
-    download_url='https://github.com/mattdavis90/base10/archive/{}.tar.gz'.
-    format(base10_version),
-    keywords=['metrics', 'abstraction'],
-    install_requires=[
-        'six',
-    ],
-    classifiers=[
-        "Development Status :: 4 - Beta",
-        "Intended Audience :: Developers",
-        "Natural Language :: English",
-        "License :: OSI Approved :: MIT License",
-        "Operating System :: OS Independent",
-        "Programming Language :: Python",
-        "Programming Language :: Python :: 2",
-        "Programming Language :: Python :: 2.7",
-        "Programming Language :: Python :: Implementation :: CPython",
-        "Programming Language :: Python :: Implementation :: PyPy",
-        "Topic :: Software Development :: Libraries :: Python Modules",
-        "Topic :: System :: Monitoring",
-    ],)
+    install_requires=('six'),
+    tests_require=(),
+    description=(
+        'Base10 is a metrics abstractoin layer for linking multiple '
+        'metrics source and stores. It also simplifies metric creation '
+        'and proxying.'),
+    classifiers=('License :: OSI Approved :: MIT License',
+                 'Programming Language :: Python :: 2',
+                 'Programming Language :: Python :: 2.6',
+                 'Programming Language :: Python :: 2.7',
+                 'Programming Language :: Python :: 3',
+                 'Programming Language :: Python :: 3.2',
+                 'Programming Language :: Python :: 3.3',
+                 'Programming Language :: Python :: 3.4',
+                 'Programming Language :: Python :: Implementation :: CPython',
+                 'Programming Language :: Python :: Implementation :: PyPy'))

@@ -1,22 +1,39 @@
 language: python
-
-python:
-- '2.7'
-- '3.6'
-- 'pypy'
-
+matrix:
+  include:
+    - python: 2.7
+      env:
+      - TOXENV=py27
+    - python: 3.3
+      env:
+      - TOXENV=py33
+    - python: 3.4
+      env:
+      - TOXENV=py34
+    - python: 3.5
+      env:
+      - TOXENV=py35
+    - python: 3.6
+      env:
+      - TOXENV=py36
+    - python: pypy
+      env:
+      - TOXENV=pypy
+    - python: pypy3
+      env:
+      - TOXENV=pypy3
 install:
-- travis_retry pip install .
-- travis_retry pip install -r test-requirements.txt
-
+  - pip install tox coveralls
 script:
-- pytest
-- pytest --cov
-
-after_success: codecov
-
-notifications:
-  hipchat:
-    rooms:
-      secure: P5yRnCP8OM3q4XIFR6jCEnYdoxyUxGm0ETf7P7rvTFfbyec975b5rwD7Zjbx7P2VSBj0cccUL0JFZ07f+2onlE5kTK1s/YIXc3qD6IUmjXwEI8XlzNxyovbvpi9USdz031GXtQF2ddW90ZdvaPoonrh5M7/ooZ1zQ8ehd1SdCQGhr/EP+FWyG7GK2bEgCSaQgbF+9UOiAgQHh+ItTWK9z4m2KPgjyH3pzsf5lNFxuUTnhG3Ri97HP3gcrm1ywkOR81GG8azdHhPKQdexV2otg0bPNUPTOnt+72tkYUgaBU6zQiNqRBkp6ecPSMby9h5gtJNn7e4nzOqjhDp4SxqL+DeRJ80YS7TG1+gpeu8XpVq+eacLNIjeBMcAvwXMiibj3K/GZQWB0qddyUGhb1vI9T9DAwbsrmolHEgxmmeLXOmdUBjEoCB1KFv4maV11efYWhLGFrNK5LZib1tqHJmGa4lhFahHWbH1HX/ICKQ4ewG/F85jLe95BbfT+IR1rGGH2jRCBC9PWLZ/5R0IKao5h6ciI3JMUa+TPtC8k5R/lCPtKrWB2sFBErZmrHoTNacYwXdR9iKYl/oIyRgwl11PBVzABq9TFSJ8O9UXdsE5sc/vckOxN7GKwWB1EH2EOk9FE3EmV+ydmpT10D3TVwl6UKjo+g/ajrrJkRlq7e0qXb8=
-    notify: true
+  - tox
+after_success:
+  - coveralls
+deploy:
+  provider: pypi
+  user: mattdavis90
+  distributions: sdist bdist_wheel
+  on:
+    condition: $TOXENV == py27
+    tags: true
+    all_branches: true
+    repo: mattdavis90/base10

@@ -30,7 +30,7 @@ class MetricHelper(Metric):
 
             cls.__initialised__ = True
 
-        return super(Metric, cls).__new__(cls) # , *args, **kwargs)
+        return super(Metric, cls).__new__(cls)  # , *args, **kwargs)
 
     def __init__(self, **kwargs):
         kwargs.pop('name', None)

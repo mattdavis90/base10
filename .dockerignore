@@ -1,6 +1,23 @@
+# Git
+.git
+.gitignore
+
+# CI
+.codeclimate.yml
+.travis.yml
+
+# Docker
+docker-compose.yml
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
+*/__pycache__/
+*/*/__pycache__/
+*/*/*/__pycache__/
 *.py[cod]
+*/*.py[cod]
+*/*/*.py[cod]
+*/*/*/*.py[cod]
 
 # C extensions
 *.so
@@ -63,6 +80,12 @@ venv/
 
 # Python mode for VIM
 .ropeproject
+*/.ropeproject
+*/*/.ropeproject
+*/*/*/.ropeproject
 
 # Vim swap files
 *.swp
+*/*.swp
+*/*/*.swp
+*/*/*/*.swp

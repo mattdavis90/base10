@@ -1,16 +1,15 @@
-Base10
-======
-Base10 is a metrics abstraction layer.
+Base10 |Version| |Build| |Coverage| |Health|
+===================================================================
 
-|PyVersions| |PyPiVersion| |BuildStatus| |Coverage| |License| |Docs|
+|Compatibility| |Implementations| |Format| |Downloads|
 
-Introduction
-------------
 Base10 is a metrics abstractoin layer for linking multiple metrics source and stores. It also simplifies metric creation and proxying.
+
 
 Documentation
 -------------
 Base10's documentation can be found at `https://base10.readthedocs.io <https://base10.readthedocs.io>`_
+
 
 Example
 -------
@@ -74,6 +73,7 @@ This shows a simple proxy that reads JSON formatted metrics from RabbitMQ and ou
         for metric in rabbitmq.read():
             influxdb.write(metric)
 
+
 Contributing
 ------------
 To contribute to base10, please make sure that any new features or changes
@@ -86,20 +86,20 @@ with ``google`` style prior to issuing your pull request.
 
 ``yapf --style=google -i -r base10``
 
-.. |PyVersions| image:: https://img.shields.io/pypi/pyversions/base10.svg?
-   :target: http://badge.fury.io/py/base10
 
-.. |PyPiVersion| image:: https://img.shields.io/pypi/v/base10.svg?
-   :target: http://badge.fury.io/py/base10
-
-.. |BuildStatus| image:: https://img.shields.io/travis/mattdavis90/base10.svg?
+.. |Build| image:: https://travis-ci.org/mattdavis90/base10.svg?branch=master
    :target: https://travis-ci.org/mattdavis90/base10
-
-.. |Coverage| image:: https://img.shields.io/codecov/c/github/mattdavis90/base10.svg?
-   :target: https://codecov.io/github/mattdavis90/base10?branch=master
-
-.. |License| image:: https://img.shields.io/pypi/l/base10.svg?
-   :target: https://base10.readthedocs.io
-
-.. |Docs| image:: https://readthedocs.org/projects/base10/badge/?version=latest
-   :target: https://base10.readthedocs.io
+.. |Coverage| image:: https://img.shields.io/coveralls/mattdavis90/base10.svg
+   :target: https://coveralls.io/r/mattdavis90/base10
+.. |Health| image:: https://codeclimate.com/github/mattdavis90/base10/badges/gpa.svg
+   :target: https://codeclimate.com/github/mattdavis90/base10
+.. |Version| image:: https://img.shields.io/pypi/v/base10.svg
+   :target: https://pypi.python.org/pypi/base10
+.. |Downloads| image:: https://img.shields.io/pypi/dm/base10.svg
+   :target: https://pypi.python.org/pypi/base10
+.. |Compatibility| image:: https://img.shields.io/pypi/pyversions/base10.svg
+   :target: https://pypi.python.org/pypi/base10
+.. |Implementations| image:: https://img.shields.io/pypi/implementation/base10.svg
+   :target: https://pypi.python.org/pypi/base10
+.. |Format| image:: https://img.shields.io/pypi/format/base10.svg
+   :target: https://pypi.python.org/pypi/base10

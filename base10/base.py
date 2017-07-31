@@ -65,6 +65,7 @@ class Dialect(object):
 
 @six.add_metaclass(abc.ABCMeta)
 class Reader(object):
+
     def __init__(self, *args, **kwargs):
         pass
 
@@ -75,6 +76,7 @@ class Reader(object):
 
 @six.add_metaclass(abc.ABCMeta)
 class Writer(object):
+
     def __init__(self, *args, **kwargs):
         pass
 
