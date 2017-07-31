@@ -14,7 +14,7 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 project = 'base10'
-copyright = '2016, Matt Davis'
+copyright = '2017, Matt Davis'
 
 import base10
 release = base10.__version__
