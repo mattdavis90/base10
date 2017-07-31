@@ -62,13 +62,22 @@ class TestMetrics:
         assert 'time' in metric.values
 
     def test_metric_repr(self):
+        import re
+        from ast import literal_eval
+
         metric = Metric(self.metric_name, self.metric_fields,
                         self.metric_metadata, **self.metric_values)
 
-        assert repr(
-            metric) == '<Metric:"{}" Fields:{} Metadata:{} Values:{}>'.format(
-                self.metric_name, self.metric_fields, self.metric_metadata,
-                self.metric_values)
+        regex = '<Metric:"([^"]+)" Fields:(\[[^\]]+\]) Metadata:(\[[^\]]+\]) Values:({[^}]+})>'
+
+        match = re.match(regex, repr(metric))
+
+        assert match is not None
+        assert match.lastindex == 4
+        assert match.group(1) == self.metric_name
+        assert literal_eval(match.group(2)) == self.metric_fields
+        assert literal_eval(match.group(3)) == self.metric_metadata
+        assert literal_eval(match.group(4)) == self.metric_values
 
     def test_metric_name_exception(self):
         alternative_values = {
