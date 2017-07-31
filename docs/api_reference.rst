@@ -7,7 +7,9 @@ Base Classes
 ------------
 
 .. automodule:: base10.base
+    :special-members: __init__
     :members:
+    :undoc-members:
 
 Helper CLasses
 --------------
