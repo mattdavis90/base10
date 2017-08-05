@@ -7,30 +7,28 @@ class MetricHelper(Metric):
 
     def __new__(cls, *args, **kwargs):
         if not cls.__initialised__:
-            if 'name' in kwargs:
-                cls._name = kwargs.pop('name')
-            else:
-                if not hasattr(cls, '_name'):
-                    raise Base10Error('_name is required')
-
-            if 'fields' in kwargs:
-                cls._fields = kwargs.pop('fields')
-            else:
-                if not hasattr(cls, '_fields'):
-                    raise Base10Error('_fields is required')
-
-            if 'metadata' in kwargs:
-                cls._metadata = kwargs.pop('metadata')
-            else:
-                if not hasattr(cls, '_metadata'):
-                    raise Base10Error('_metadata is required')
+            kwargs = cls._pop_and_store('name', kwargs)
+            kwargs = cls._pop_and_store('fields', kwargs)
+            kwargs = cls._pop_and_store('metadata', kwargs)
 
             if 'time' in cls._fields:
                 cls._fields.remove('time')
 
             cls.__initialised__ = True
 
-        return super(Metric, cls).__new__(cls)  # , *args, **kwargs)
+        return super(Metric, cls).__new__(cls)
+
+    @classmethod
+    def _pop_and_store(cls, prop, kwargs):
+        priv_prop = '_' + prop
+
+        if prop in kwargs:
+            setattr(cls, priv_prop, kwargs.pop(prop))
+        else:
+            if not hasattr(cls, priv_prop):
+                raise Base10Error(priv_prop + ' is required')
+
+        return kwargs
 
     def __init__(self, **kwargs):
         kwargs.pop('name', None)
