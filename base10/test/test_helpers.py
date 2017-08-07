@@ -2,7 +2,7 @@ import pytest
 from time import time
 
 from base10 import MetricHelper, MetricHandler
-from base10.base import Metric
+from base10.base import Metric, Reader, Dialect
 from base10.exceptions import Base10Error
 
 
@@ -156,3 +156,22 @@ class TestMetricHandler:
 
         assert 'Attempt to read from a write-only MetricHandler' in str(
             exc.value)
+
+    def test_metric_handler_reading(self):
+
+        class TestReader(Reader):
+
+            def read(self):
+                yield ''
+
+        class TestDialect(Dialect):
+
+            def from_string(self, string):
+                return Metric(name='', fields=[], metadata=[])
+
+        class Handler(MetricHandler):
+            _reader = TestReader()
+            _dialect = TestDialect()
+
+        handler = Handler()
+        assert next(handler.read()) is not None

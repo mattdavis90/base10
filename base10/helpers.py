@@ -52,7 +52,10 @@ class MetricHandler(object):
     def read(self):
         try:
             while True:
-                yield self._dialect.from_string(next(self._reader.read()))
+                content = next(self._reader.read())
+
+                if content is not None:
+                    yield self._dialect.from_string(content)
         except AttributeError as e:
             raise Base10Error('Attempt to read from a write-only MetricHandler',
                               e)

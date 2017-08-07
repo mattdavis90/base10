@@ -41,7 +41,8 @@ class RabbitMQReader(RabbitMQTransport, Reader):
         self._channel.queue_bind(self._queue_name, self._exchange, routing_key)
 
     def read(self):
-        for method_frame, _, body in self._channel.consume(self._queue_name):
+        for method_frame, _, body in self._channel.consume(
+                self._queue_name, inactivity_timeout=0.1):
             self._channel.basic_ack(method_frame.delivery_tag)
             yield body
 
