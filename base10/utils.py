@@ -14,10 +14,7 @@ class _Accumulator(object):
     @property
     def value(self):
         if isinstance(self._value, Number):
-            if self._count != 0:
-                return self._value / self._count
-            else:
-                return 0
+            return self._value / self._count
         else:
             return self._value
 
@@ -28,7 +25,7 @@ class _Accumulator(object):
             self._count += 1
         else:
             self._value = value
-            count = 1
+            self._count += 1
 
     @property
     def count(self):
