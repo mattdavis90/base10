@@ -1,3 +1,4 @@
+import six
 from numbers import Number
 from time import time
 from collections import defaultdict
@@ -40,16 +41,16 @@ def count_summarise(metrics, window=1):
     for metric in metrics:
         if metric is not None:
             name = metric.name
-            metadata = tuple((k, v) for k, v in metric.values.iteritems()
+            metadata = tuple((k, v) for k, v in six.iteritems(metric.values)
                              if k in metric.metadata)
 
-            for field, value in metric.values.iteritems():
+            for field, value in six.iteritems(metric.values):
                 if field in metric.fields:
                     accumulator_dict[(name, metadata)][field].value = value
 
-        for (name, metadata), accumulators in accumulator_dict.iteritems():
+        for (name, metadata), accumulators in six.iteritems(accumulator_dict):
             fields = [
-                key for key, accumulator in accumulators.iteritems()
+                key for key, accumulator in six.iteritems(accumulators)
                 if accumulator.count >= window
             ]
 
