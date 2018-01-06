@@ -91,7 +91,7 @@ to existing functionality **include test coverage**.
 Additionally, please format your code using `yapf <http://pypi.python.org/pypi/yapf>`_
 with ``facebook`` style prior to issuing your pull request.
 
-``yapf --style=facebook -i -r base10``
+``yapf --style=facebook -i -r base10 setup.py``
 
 
 .. |Build| image:: https://travis-ci.org/mattdavis90/base10.svg?branch=master
