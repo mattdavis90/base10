@@ -2,21 +2,23 @@ from base10.base import Reader, Writer
 
 
 class RabbitMQTransport(object):
-
-    def __init__(self,
-                 broker='127.0.0.1',
-                 port=5672,
-                 virtual_host='/',
-                 exchange='amq.topic',
-                 queue_name=None,
-                 username='guest',
-                 password='guest'):
+    def __init__(
+        self,
+        broker='127.0.0.1',
+        port=5672,
+        virtual_host='/',
+        exchange='amq.topic',
+        queue_name=None,
+        username='guest',
+        password='guest'
+    ):
         try:
             self._pika = __import__('pika')
         except ImportError:
             from base10.exceptions import Base10Error
             raise Base10Error(
-                'RabbitMQReader and RabbitMQWriter require the pika module')
+                'RabbitMQReader and RabbitMQWriter require the pika module'
+            )
 
         if queue_name is None:
             from uuid import uuid1 as uuid
@@ -33,16 +35,17 @@ class RabbitMQTransport(object):
         connect()
 
         def _connect(self):
-            credentials = self._pika.PlainCredentials(self._username,
-                                                      self._password)
+            credentials = self._pika.PlainCredentials(
+                self._username, self._password
+            )
             parameters = self._pika.ConnectionParameters(
-                self._broker, self._port, self._virtual_host, credentials)
+                self._broker, self._port, self._virtual_host, credentials
+            )
             connection = self._pika.BlockingConnection(parameters)
             self._channel = connection.channel()
 
 
 class RabbitMQReader(RabbitMQTransport, Reader):
-
     def __init__(self, routing_key='metrics.#', auto_delete=True, **kwargs):
         super(RabbitMQReader, self).__init__(**kwargs)
 
@@ -56,7 +59,6 @@ class RabbitMQReader(RabbitMQTransport, Reader):
 
 
 class RabbitMQWriter(RabbitMQTransport, Writer):
-
     def __init__(self, topic='metrics.all', **kwargs):
         super(RabbitMQWriter, self).__init__(**kwargs)
 

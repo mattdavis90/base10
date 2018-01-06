@@ -30,8 +30,12 @@ class Metric(object):
         timestamp = values.pop('time', self._current_timestamp())
 
         if sorted(self._fields + self._metadata) != sorted(values.keys()):
-            raise NameError('Expected {} but got {}'.format(
-                sorted(self._fields + self._metadata), sorted(values.keys())))
+            raise NameError(
+                'Expected {} but got {}'.format(
+                    sorted(self._fields + self._metadata),
+                    sorted(values.keys())
+                )
+            )
 
         self._values = values
         self._values['time'] = timestamp
@@ -65,11 +69,11 @@ class Metric(object):
 
     def __repr__(self):
         return '<Metric:"{}" Fields:{} Metadata:{} Values:{}>'.format(
-            self.name, self.fields, self.metadata, self.values)
+            self.name, self.fields, self.metadata, self.values
+        )
 
 
 class Dialect(object):
-
     def __init__(self, *args, **kwargs):
         pass
 
@@ -82,7 +86,6 @@ class Dialect(object):
 
 @six.add_metaclass(abc.ABCMeta)
 class Reader(object):
-
     def __init__(self, *args, **kwargs):
         pass
 
@@ -93,7 +96,6 @@ class Reader(object):
 
 @six.add_metaclass(abc.ABCMeta)
 class Writer(object):
-
     def __init__(self, *args, **kwargs):
         pass
 

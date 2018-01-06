@@ -3,7 +3,6 @@ from base10.exceptions import DialectError
 
 
 class SplunkDialect(Dialect):
-
     def to_string(self, metric):
         pairs = ['metric_name={}'.format(self._clean_value(metric.name))]
         pairs += [

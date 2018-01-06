@@ -1,6 +1,7 @@
 from base10.helpers import (
     MetricHelper,
-    MetricHandler,)
+    MetricHandler,
+)
 
 __version__ = '0.5.5'
 

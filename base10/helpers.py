@@ -39,7 +39,6 @@ class MetricHelper(Metric):
 
 
 class MetricHandler(object):
-
     def __init__(self, *args, **kwargs):
         if not hasattr(self, '_reader') and not hasattr(self, '_writer'):
             raise Base10Error('Either _reader or _writer is required')
@@ -52,12 +51,14 @@ class MetricHandler(object):
             while True:
                 yield self._dialect.from_string(next(self._reader.read()))
         except AttributeError as e:
-            raise Base10Error('Attempt to read from a write-only MetricHandler',
-                              e)
+            raise Base10Error(
+                'Attempt to read from a write-only MetricHandler', e
+            )
 
     def write(self, metric):
         try:
             return self._writer.write(self._dialect.to_string(metric))
         except AttributeError as e:
-            raise Base10Error('Attempt to write to a read-only MetricHandler',
-                              e)
+            raise Base10Error(
+                'Attempt to write to a read-only MetricHandler', e
+            )

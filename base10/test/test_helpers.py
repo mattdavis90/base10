@@ -7,7 +7,6 @@ from base10.exceptions import Base10Error
 
 
 class TestMetricHelper:
-
     def setup_method(self):
         self.metric_name = 'metric'
         self.metric_fields = ['value']
@@ -15,7 +14,6 @@ class TestMetricHelper:
         self.metric_values = {'value': 0, 'hostname': 'test', 'time': time()}
 
     def test_metric_helper(self):
-
         class MyMetric(MetricHelper):
             _name = self.metric_name
             _fields = self.metric_fields
@@ -31,7 +29,6 @@ class TestMetricHelper:
         assert metric.values == self.metric_values
 
     def test_metric_helper_name_exception(self):
-
         class MyMetric(MetricHelper):
             _fields = self.metric_fields
             _metadata = self.metric_metadata
@@ -42,7 +39,6 @@ class TestMetricHelper:
         assert '_name is required' == str(exc.value)
 
     def test_metric_helper_fields_exception(self):
-
         class MyMetric(MetricHelper):
             _name = self.metric_name
             _metadata = self.metric_metadata
@@ -53,7 +49,6 @@ class TestMetricHelper:
         assert '_fields is required' == str(exc.value)
 
     def test_metric_helper_metadata_exception(self):
-
         class MyMetric(MetricHelper):
             _name = self.metric_name
             _fields = self.metric_fields
@@ -64,7 +59,6 @@ class TestMetricHelper:
         assert '_metadata is required' == str(exc.value)
 
     def test_metric_helper_handles_time_field(self):
-
         class MyMetric(MetricHelper):
             _name = self.metric_name
             _fields = self.metric_fields + ['time']
@@ -75,7 +69,6 @@ class TestMetricHelper:
         assert metric.fields == self.metric_fields
 
     def test_metric_helper_kwargs(self):
-
         class MyMetric(MetricHelper):
             _name = self.metric_name
             _fields = self.metric_fields
@@ -90,7 +83,8 @@ class TestMetricHelper:
             name=alternative_name,
             fields=alternative_fields,
             metadata=alternative_metadata,
-            **alternative_values)
+            **alternative_values
+        )
 
         assert isinstance(metric, Metric)
 
@@ -101,9 +95,7 @@ class TestMetricHelper:
 
 
 class TestMetricHandler:
-
     def test_metric_handler_no_reader_writer(self):
-
         class Handler(MetricHandler):
             pass
 
@@ -113,7 +105,6 @@ class TestMetricHandler:
         assert 'Either _reader or _writer is required' == str(exc.value)
 
     def test_metric_handler_no_dialect_with_reader(self):
-
         class Handler(MetricHandler):
             _reader = None
 
@@ -123,7 +114,6 @@ class TestMetricHandler:
         assert '_dialect is required' == str(exc.value)
 
     def test_metric_handler_no_dialect_with_writer(self):
-
         class Handler(MetricHandler):
             _writer = None
 
@@ -133,7 +123,6 @@ class TestMetricHandler:
         assert '_dialect is required' == str(exc.value)
 
     def test_metric_handler_write_to_read_only(self):
-
         class Handler(MetricHandler):
             _reader = None
             _dialect = None
@@ -145,7 +134,6 @@ class TestMetricHandler:
         assert 'Attempt to write to a read-only MetricHandler' in str(exc.value)
 
     def test_metric_handler_read_from_write_only(self):
-
         class Handler(MetricHandler):
             _writer = None
             _dialect = None
@@ -155,4 +143,5 @@ class TestMetricHandler:
             metric = next(handler.read())
 
         assert 'Attempt to read from a write-only MetricHandler' in str(
-            exc.value)
+            exc.value
+        )

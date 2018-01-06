@@ -89,9 +89,9 @@ to existing functionality **include test coverage**.
 *Pull requests that add or change code without coverage will most likely be rejected.*
 
 Additionally, please format your code using `yapf <http://pypi.python.org/pypi/yapf>`_
-with ``google`` style prior to issuing your pull request.
+with ``facebook`` style prior to issuing your pull request.
 
-``yapf --style=google -i -r base10``
+``yapf --style=facebook -i -r base10``
 
 
 .. |Build| image:: https://travis-ci.org/mattdavis90/base10.svg?branch=master

@@ -3,7 +3,6 @@ from base10.exceptions import DialectError
 
 
 class InfluxDBDialect(Dialect):
-
     def to_string(self, metric):
         name = self._clean_measurement(metric.name)
         tags = [
@@ -12,14 +11,16 @@ class InfluxDBDialect(Dialect):
         ]
         fields = [
             '{}={}'.format(
-                self._clean_field_key(k), self._clean_field_value(v))
-            for k, v in metric.values.items() if k in metric.fields
+                self._clean_field_key(k), self._clean_field_value(v)
+            ) for k, v in metric.values.items() if k in metric.fields
         ]
         timestamp = metric.values['time']
 
-        return '{}{}{} {} {:d}'.format(name, ',' if len(tags) > 0 else '',
-                                       ','.join(tags), ','.join(fields),
-                                       int(timestamp * 1e6))
+        return '{}{}{} {} {:d}'.format(
+            name, ','
+            if len(tags) > 0 else '', ','.join(tags), ','.join(fields),
+            int(timestamp * 1e6)
+        )
 
     def _clean_measurement(self, measurement):
         measurement = measurement.replace(',', '\\,')
