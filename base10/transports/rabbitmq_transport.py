@@ -22,14 +22,22 @@ class RabbitMQTransport(object):
             from uuid import uuid1 as uuid
             queue_name = str(uuid())
 
+        self._broker = broker
+        self._port = port
+        self._virtual_host = virtual_host
         self._exchange = exchange
         self._queue_name = queue_name
+        self._username = username
+        self._password = password
 
-        credentials = self._pika.PlainCredentials(username, password)
-        parameters = self._pika.ConnectionParameters(broker, port, virtual_host,
-                                                     credentials)
-        connection = self._pika.BlockingConnection(parameters)
-        self._channel = connection.channel()
+        connect()
+
+        def _connect(self):
+            credentials = self._pika.PlainCredentials(self._username, self._password)
+            parameters = self._pika.ConnectionParameters(self._broker, self._port, self._virtual_host,
+                                                         credentials)
+            connection = self._pika.BlockingConnection(parameters)
+            self._channel = connection.channel()
 
 
 class RabbitMQReader(RabbitMQTransport, Reader):
@@ -54,4 +62,8 @@ class RabbitMQWriter(RabbitMQTransport, Writer):
         self._topic = topic
 
     def write(self, string):
-        self._channel.publish(self._exchange, self._topic, string)
+        try:
+            self._channel.publish(self._exchange, self._topic, string)
+        except pika.exceptions.ChannelClosed:
+            self._connect()
+            self._channel.publish(self._exchange, self._topic, string)
