@@ -33,9 +33,10 @@ class RabbitMQTransport(object):
         connect()
 
         def _connect(self):
-            credentials = self._pika.PlainCredentials(self._username, self._password)
-            parameters = self._pika.ConnectionParameters(self._broker, self._port, self._virtual_host,
-                                                         credentials)
+            credentials = self._pika.PlainCredentials(self._username,
+                                                      self._password)
+            parameters = self._pika.ConnectionParameters(
+                self._broker, self._port, self._virtual_host, credentials)
             connection = self._pika.BlockingConnection(parameters)
             self._channel = connection.channel()
 

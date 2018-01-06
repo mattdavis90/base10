@@ -41,7 +41,7 @@ setup(
         'metrics source and stores. It also simplifies metric creation '
         'and proxying.'),
     long_description=read('README.rst'),
-    classifiers=('License :: OSI Approved :: MIT License',
+    classifiers=['License :: OSI Approved :: MIT License',
                  'Programming Language :: Python :: 2',
                  'Programming Language :: Python :: 2.7',
                  'Programming Language :: Python :: 3',
@@ -49,4 +49,4 @@ setup(
                  'Programming Language :: Python :: 3.3',
                  'Programming Language :: Python :: 3.4',
                  'Programming Language :: Python :: Implementation :: CPython',
-                 'Programming Language :: Python :: Implementation :: PyPy'))
+                 'Programming Language :: Python :: Implementation :: PyPy'])
