@@ -49,12 +49,16 @@ class JSONDialect(Dialect):
             {
                 'name': metric.name,
                 'fields':
-                {k: v
-                 for k, v in metric.values.items() if k in metric.fields},
-                'metadata': {
-                    k: v
-                    for k, v in metric.values.items() if k in metric.metadata
-                },
+                    {
+                        k: v
+                        for k, v in metric.values.items() if k in metric.fields
+                    },
+                'metadata':
+                    {
+                        k: v
+                        for k, v in metric.values.items()
+                        if k in metric.metadata
+                    },
                 'timestamp': metric.values['time']
             }
         )
