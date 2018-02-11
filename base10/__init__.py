@@ -3,7 +3,7 @@ from base10.helpers import (
     MetricHandler,
 )
 
-__version__ = '0.6.2'
+__version__ = '0.6.3'
 
 __all__ = [
     'MetricHelper',
