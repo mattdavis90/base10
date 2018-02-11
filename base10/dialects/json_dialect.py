@@ -1,4 +1,5 @@
 import json
+import six
 
 from base10.base import Dialect, Metric
 from base10.exceptions import DialectError
@@ -24,8 +25,8 @@ class JSONDialect(Dialect):
             data = json.loads(string)
 
             name = data['name']
-            fields = data['fields'].keys()
-            metadata = data['metadata'].keys()
+            fields = list(six.iterkeys(data['fields']))
+            metadata = list(six.iterkeys(data['metadata']))
             timestamp = data['timestamp']
 
             kwargs = {}
