@@ -3,7 +3,6 @@ from base10.exceptions import TransportError
 
 
 class FileTransport(object):
-
     def __init__(self, filename, mode):
         try:
             self._file = open(filename, mode)
@@ -12,7 +11,6 @@ class FileTransport(object):
 
 
 class FileReader(FileTransport, Reader):
-
     def __init__(self, filename, mode='r'):
         super(FileReader, self).__init__(filename, mode)
 
@@ -22,7 +20,6 @@ class FileReader(FileTransport, Reader):
 
 
 class FileWriter(FileTransport, Writer):
-
     def __init__(self, filename, mode='w'):
         super(FileWriter, self).__init__(filename, mode)
 

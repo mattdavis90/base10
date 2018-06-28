@@ -6,4 +6,4 @@ find . -maxdepth 1 -name "*.rst" -exec rst2html.py -q --exit-status=2 {} \; > /d
 echo "Checking 'setup.py'" && \
 python setup.py check --strict --restructuredtext --metadata && \
 echo "Checking code style" && \
-yapf --style=google -d -r setup.py base10
+yapf --style=facebook -d -r setup.py base10

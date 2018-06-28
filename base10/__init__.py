@@ -1,8 +1,9 @@
 from base10.helpers import (
     MetricHelper,
-    MetricHandler,)
+    MetricHandler,
+)
 
-__version__ = '0.5.3'
+__version__ = '0.6.3'
 
 __all__ = [
     'MetricHelper',

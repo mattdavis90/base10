@@ -28,7 +28,7 @@ def read(fname):
 setup(
     name='base10',
     version=find_version('base10/__init__.py'),
-    packages=find_packages(exclude=('test*',)),
+    packages=find_packages(exclude=('test*', )),
     package_dir={'base10': 'base10'},
     url='https://github.com/mattdavis90/base10',
     license='MIT',
@@ -39,14 +39,18 @@ setup(
     description=(
         'Base10 is a metrics abstractoin layer for linking multiple '
         'metrics source and stores. It also simplifies metric creation '
-        'and proxying.'),
+        'and proxying.'
+    ),
     long_description=read('README.rst'),
-    classifiers=('License :: OSI Approved :: MIT License',
-                 'Programming Language :: Python :: 2',
-                 'Programming Language :: Python :: 2.7',
-                 'Programming Language :: Python :: 3',
-                 'Programming Language :: Python :: 3.2',
-                 'Programming Language :: Python :: 3.3',
-                 'Programming Language :: Python :: 3.4',
-                 'Programming Language :: Python :: Implementation :: CPython',
-                 'Programming Language :: Python :: Implementation :: PyPy'))
+    classifiers=[
+        'License :: OSI Approved :: MIT License',
+        'Programming Language :: Python :: 2',
+        'Programming Language :: Python :: 2.7',
+        'Programming Language :: Python :: 3',
+        'Programming Language :: Python :: 3.2',
+        'Programming Language :: Python :: 3.3',
+        'Programming Language :: Python :: 3.4',
+        'Programming Language :: Python :: Implementation :: CPython',
+        'Programming Language :: Python :: Implementation :: PyPy'
+    ]
+)

@@ -6,7 +6,6 @@ from base10.exceptions import DialectError
 
 
 class TestDialects:
-
     def test_dialect_construction(self):
         assert isinstance(Dialect(), Dialect)
 
@@ -28,7 +27,6 @@ class TestDialects:
 
 
 class TestMetrics:
-
     def setup_method(self):
         self.metric_name = 'metric'
         self.metric_fields = ['value']
@@ -36,8 +34,10 @@ class TestMetrics:
         self.metric_values = {'value': 0, 'hostname': 'test', 'time': time()}
 
     def test_metric_properties(self):
-        metric = Metric(self.metric_name, self.metric_fields,
-                        self.metric_metadata, **self.metric_values)
+        metric = Metric(
+            self.metric_name, self.metric_fields, self.metric_metadata,
+            **self.metric_values
+        )
 
         assert metric.name == self.metric_name
         assert metric.fields == self.metric_fields
@@ -45,8 +45,10 @@ class TestMetrics:
         assert metric.values == self.metric_values
 
     def test_metric_handle_time_field(self):
-        metric = Metric(self.metric_name, self.metric_fields + ['time'],
-                        self.metric_metadata, **self.metric_values)
+        metric = Metric(
+            self.metric_name, self.metric_fields + ['time'],
+            self.metric_metadata, **self.metric_values
+        )
 
         assert 'time' not in metric.fields
 
@@ -56,8 +58,10 @@ class TestMetrics:
             'hostname': 'test'
         }  # Note: No explicit time
 
-        metric = Metric(self.metric_name, self.metric_fields,
-                        self.metric_metadata, **alternative_values)
+        metric = Metric(
+            self.metric_name, self.metric_fields, self.metric_metadata,
+            **alternative_values
+        )
 
         assert 'time' in metric.values
 
@@ -65,8 +69,10 @@ class TestMetrics:
         import re
         from ast import literal_eval
 
-        metric = Metric(self.metric_name, self.metric_fields,
-                        self.metric_metadata, **self.metric_values)
+        metric = Metric(
+            self.metric_name, self.metric_fields, self.metric_metadata,
+            **self.metric_values
+        )
 
         regex = '<Metric:"([^"]+)" Fields:(\[[^\]]+\]) Metadata:(\[[^\]]+\]) Values:({[^}]+})>'
 
@@ -87,15 +93,17 @@ class TestMetrics:
         }  # Note: "host" not "hostname"
 
         with pytest.raises(NameError) as exc:
-            metric = Metric(self.metric_name, self.metric_fields,
-                            self.metric_metadata, **alternative_values)
+            metric = Metric(
+                self.metric_name, self.metric_fields, self.metric_metadata,
+                **alternative_values
+            )
 
         assert "Expected ['hostname', 'value'] but got ['host', 'value']" in str(
-            exc.value)
+            exc.value
+        )
 
 
 class TestTransports:
-
     def test_reader_construction(self):
         with pytest.raises(TypeError) as exc:
             reader = Reader()
